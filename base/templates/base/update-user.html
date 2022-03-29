@@ -2,7 +2,7 @@
 
 {% block content %}
 
-<main class="create-room layout">
+<main class="update-account layout">
   <div class="container">
     <div class="layout__box">
       <div class="layout__boxHeader">
@@ -15,43 +15,30 @@
               </path>
             </svg>
           </a>
-          <h3>Create/Update Study Room</h3>
+          <h3>Edit your profile</h3>
         </div>
       </div>
       <div class="layout__body">
         <form class="form" action="" method="POST">
           {% csrf_token %}
 
+          {% for field in form %}
           <div class="form__group">
-            <label for="room_topic">Topic Name</label>
-            <input type="text" name="topic" value="{{room.topic.name}}" required list="topic-list" />
-            <datalist id="topic-list">
-              <select id="room_topic">
-                {% for topic in topics %}
-                <option value="{{topic.name}}">{{topic.name}}</option>
-                
-                {% endfor %}
-              </select>
-            </datalist>
+            <label for="profile_pic">{{field.label}}</label>
+            {{field}}
           </div>
+          {% endfor %}
 
-          <div class="form__group">
-            <label for="room_name">Room Name</label>
-            {{form.name}}
-          </div>
-
-          <div class="form__group">
-            <label for="room_description">Room description</label>
-            {{form.description}}
-          </div>
-
+         
           <div class="form__action">
             <a class="btn btn--dark" href="{% url 'home' %}">Cancel</a>
-            <button class="btn btn--main" type="submit">Submit</button>
+            <button class="btn btn--main" type="submit">Update</button>
           </div>
         </form>
       </div>
     </div>
   </div>
+  </div>
 </main>
+
 {% endblock content %}
