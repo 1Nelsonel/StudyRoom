@@ -25,7 +25,9 @@ class Room(models.Model):
         ordering = ['-updated', '-created']
 
     def __str__(self):
-        return self.name
+        return self.name[0:50] 
+
+   
 
 
 class Message(models.Model):

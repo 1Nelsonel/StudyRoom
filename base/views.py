@@ -1,4 +1,5 @@
 from multiprocessing import context
+from unicodedata import name
 from django.shortcuts import redirect, render
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
@@ -89,6 +90,7 @@ def room(request, pk):
             body=request.POST.get('body')
         )
         room.participants.add(request.user)
+
         messages.success(request, 'Message sent')
         return redirect('room', pk=room.id)
 
@@ -108,16 +110,21 @@ def userProfile(request, pk):
 @login_required(login_url='login')
 def createRoom(request):
     form = RoomForm()
+    topics = Topic.objects.all()
     if request.method == 'POST':
-        form = RoomForm(request.POST)
-        if form.is_valid():
-            room = form.save(commit=False)
-            room.host = request.user
-            room.save()
-            messages.success(request, 'Room created')
-            return redirect('home')
+        topic_name = request.POST.get('topic')
+        topic, create = Topic.objects.get_or_create(name = topic_name)
 
-    context = {'form': form}
+        Room.objects.create(
+            host=request.user,
+            topic=topic,
+            name=request.POST.get('name'),
+            description=request.POST.get('description'),
+        ) 
+        messages.success(request, 'Room created')
+        return redirect('home')
+
+    context = {'form': form, 'topics':topics}
     return render(request, 'base/room_form.html', context)
 
 
@@ -125,7 +132,7 @@ def createRoom(request):
 def updateRoom(request, pk):
     room = Room.objects.get(id=pk)
     form = RoomForm(instance=room)
-
+    topics = Topic.objects.all()
     if request.user != room.host:
         messages.warning(request, 'Invalid request!! ')
         return redirect('home')
@@ -137,7 +144,7 @@ def updateRoom(request, pk):
             messages.success(request, 'Room updated')
             return redirect('home')
 
-    context = {'form': form}
+    context = {'form': form, 'topics': topics}
     return render(request, 'base/room_form.html', context)
 
 
