@@ -7,9 +7,9 @@
   <main class="profile-page layout layout--2">
     <div class="container">
       <!-- Room Start -->
-      <div class="room">
-        <div class="room__top">
-          <div class="room__topLeft">
+      <div class="room bg-dark">
+        <div class="room__top bg-dark">
+          <div class="room__topLeft bg-dark">
             <a href="{% url 'home' %}">
               <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
                 <title>arrow-left</title>
@@ -19,9 +19,11 @@
               </svg>
             </a>
             <h3>Study Room</h3>
+            <hr class="bg-light">
           </div>
+          
           {% if room.host == request.user %}
-          <div class="room__topRight">
+          <div class="room__topRight bg-dark">
             <a href="{% url 'update-room' room.id %}">
               <svg enable-background="new 0 0 24 24" height="32" viewBox="0 0 24 24" width="32"
                 xmlns="http://www.w3.org/2000/svg">
@@ -50,11 +52,13 @@
               </svg>
             </a>
           </div>
+          
           {% endif %}
- 
+          
         </div>
-        <div class="room__box scroll">
-          <div class="room__header scroll">
+
+        <div class="room__box scroll bg-dark">
+          <div class="room__header scroll bg-dark">
             <div class="room__info">
               <h3>{{room.name.title}}</h3>
               <span>{{room.created|timesince}} ago</span>
@@ -68,13 +72,13 @@
                 <span>{{room.host.username}}</span>
               </a>
             </div>
-            <div class="room__details">
+            <div class="room__details bg-dark">
               {{room.description|truncatewords:30}}
             </div>
             <span class="room__topics">{{room.topic}}</span>
           </div>
-          <div class="room__conversation">
-            <div class="threads scroll">
+          <div class="room__conversation bg-dark">
+            <div class="threads scroll bg-dark">
               {% for message in room_messages %}
               <div class="thread">
                 <div class="thread__top">
@@ -100,7 +104,7 @@
                 </a>
                   {% endif %}
                 </div>
-                <div class="thread__details">
+                <div class="thread__details text-light">
                  {{message.body|truncatewords:15}}
                 </div>
               </div>
@@ -109,10 +113,10 @@
           </div>
         </div>
         {% if request.user.is_authenticated %}
-        <div class="room__message">
+        <div class="room__message ">
           <form action="" method="POST">
             {% csrf_token%}
-            <input name="body" placeholder="Write your message here..." />
+            <input class="bg-light text-dark " name="body" placeholder="Write your message here..." />
           </form>
         </div>
         {% endif %}
@@ -120,8 +124,9 @@
       <!-- Room End -->
 
       <!--   Start -->
-      <div class="participants">
-        <h3 class="participants__top">Participants <span>({{participants.count}})</span></h3>
+      <div class="participants bg-dark">
+        <h3 class="participants__top bg-dark">Participants <span>({{participants.count}})</span></h3>
+        <hr class="bg-light">
         <div class="participants__list scroll">
           {% for user in participants %}
           <a href="{% url 'user-profile' user.id %}" class="participant">

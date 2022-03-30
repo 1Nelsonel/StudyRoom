@@ -1,9 +1,10 @@
 
-<div class="activities">
+<div class="activities bg-dark">
    
     <div class="activities__header">
-      <h2>Recent Activities</h2>
+      <h2 class="bg-dark text-light">Recent Activities</h2>
     </div>
+    <hr class="bg-light">
      {% for message in room_messages %}
     <div class="activities__box">
       <div class="activities__boxHeader roomListRoom__header">
@@ -12,7 +13,7 @@
           <div class="avatar avatar--small">
             <img src="https://randomuser.me/api/portraits/women/11.jpg" />
           </div>
-          <p>
+          <p >
             @{{message.user}}
             <span>{{message.created|timesince}} ago</span>
           </p>
@@ -34,7 +35,7 @@
       </div>
       <div class="activities__boxContent">
         <p>replied to post “<a href="{% url 'room' message.room.id %}">{{message.room}}</a>”</p>
-        <div class="activities__boxRoomContent">
+        <div class="activities__boxRoomContent bg-light text-dark">
             {{message.body}}
         </div>
       </div>

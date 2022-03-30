@@ -2,28 +2,30 @@
 
 {% block content %}
 
-<main class="auth layout">
+<main class="auth layout bg-dark">
 
   {% if page == 'login' %}
-  <div class="container">
-    <div class="layout__box">
-      <div class="layout__boxHeader">
-        <div class="layout__boxTitle">
+  <div class="container bg-dark">
+    <div class="layout__box bg-dark">
+      <div class="layout__boxHeader bg-dark">
+        <div class="layout__boxTitle bg-dark">
           <h3>Login</h3>
         </div>
+        <hr class="bg-light">
       </div>
-      <div class="layout__body">
+      <hr class="bg-light">
+      <div class="layout__body ">
         <h2 class="auth__tagline">Find your study partner</h2>
 
         <form class="form" action="" method="POST">
           {% csrf_token %}
           <div class="form__group form__group">
-            <label for="room_name">Username</label>
-            <input id="username" name="username" type="text" placeholder="enter your username" />
+            <label class="text-light" for="room_name">Username</label>
+            <input class="text-dark bg-light" id="username" name="username" type="text" placeholder="enter your username" />
           </div>
           <div class="form__group">
-            <label for="password">Password</label>
-            <input id="password" name="password" type="password"
+            <label class="text-light" for="password">Password</label>
+            <input class="text-dark bg-light" id="password" name="password" type="password"
               placeholder="enter your password" />
           </div>
 
@@ -51,22 +53,21 @@
   </div> 
   {% else %}
   <div class="container">
-    <div class="layout__box">
-      <div class="layout__boxHeader">
+    <div class="layout__box bg-dark mt-4">
+      <div class="layout__boxHeader bg-dark">
         <div class="layout__boxTitle">
-          <h3>Register</h3>
-        </div>
+          <h3 class="">Register</h3>
+        </div>        
       </div>
-      <div class="layout__body">
-        <h2 class="auth__tagline">Find your study partner</h2>
-
+      
+      <div class="layout__body">     
         <form class="form" action="" method="POST">
           {% csrf_token %}
 
           {% for field in form %}
           <div class="form__group form__group">
-            <label for="room_name">{{field.label}}</label>
-            {{field }}
+            <label class="text-light" for="room_name">{{field.label}}</label>
+           {{field }}
           </div>
           {% endfor %}
           
@@ -82,7 +83,7 @@
               </path>
             </svg>
 
-            Login
+            Register
           </button>
         </form>
 

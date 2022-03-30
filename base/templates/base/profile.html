@@ -16,15 +16,15 @@
             </div>
           </div>
           <div class="profile__info">
-            <h3>{{user.username}}</h3>
-            <p>@{{user.username}}</p>
+            <h3 class="text-dark">{{user.username}}</h3>
+            <p class="text-info">@{{user.username}}</p>
             {% if request.user == user %}
             <a href="{% url 'update-user' %}" class="btn btn--main btn--pill">Edit Profile</a>
             {% endif %}
           </div>
           <div class="profile__about">
             <h3>About</h3>
-            <p>
+            <p class="text-dark">
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur illo tenetur
               facilis sunt nemo debitis quisquam hic atque aut? Ducimus alias placeat optio
               accusamus repudiandae quis ab ex exercitationem rem?

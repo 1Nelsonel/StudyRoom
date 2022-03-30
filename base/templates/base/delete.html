@@ -4,8 +4,8 @@
 
     <main class="delete-item layout">
         <div class="container">
-            <div class="layout__box">
-                <div class="layout__boxHeader">
+            <div class="layout__box bg-dark">
+                <div class="layout__boxHeader bg-dark">
                     <div class="layout__boxTitle">
                         <a href="{{request.META.HTTP_REFERER}}">
                             <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="32" height="32"
@@ -19,11 +19,12 @@
                         <h3>Back</h3>
                     </div>
                 </div>
+                <hr class="bg-light">
                 <div class="layout__body">
                     <form class="form" action="" method="POST">
                         {% csrf_token %}
                         <div class="form__group">
-                            <p>Are you sure you want to delete "{{obj}}"?</p>
+                            <p class="text-light">Are you sure you want to delete "{{obj}}"?</p>
                         </div>
 
                         <div class="for__group">
